@@ -14,7 +14,8 @@ import {
   X, 
   Factory,
   CheckCircle2,
-  Clock
+  Clock,
+  ExternalLink
 } from 'lucide-react';
 import AIChat from './components/AIChat';
 
@@ -86,6 +87,8 @@ export default function App() {
   };
 
   const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5511997379588";
+  const CAMOZZI_CATALOG_URL = "https://shop.camozzi.com/store/camozzi/it/en/";
+  const INTERNAL_CATALOG_URL = "https://drive.google.com/file/d/1RF2ZjgEwPpZqgOHCqJCCawGrZIN4pFeK/view?usp=drive_link";
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 antialiased scroll-smooth">
@@ -287,7 +290,12 @@ export default function App() {
               <h2 className="text-red-600 font-black uppercase tracking-widest text-xs mb-4">Nosso Portfólio</h2>
               <h3 className="text-4xl font-black text-slate-900 tracking-tight">Soluções em Pneumática</h3>
             </div>
-            <a href="#contato" onClick={(e) => handleScrollTo(e, 'contato')} className="text-red-600 font-black uppercase tracking-widest text-sm flex items-center gap-2 group">
+            <a 
+              href={CAMOZZI_CATALOG_URL} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-red-600 font-black uppercase tracking-widest text-sm flex items-center gap-2 group"
+            >
               Consultar catálogo completo <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
@@ -317,8 +325,18 @@ export default function App() {
           </div>
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
             {ASSETS.portfolio.map((img, i) => (
-              <div key={i} className="break-inside-avoid bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+              <div key={i} className="break-inside-avoid bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm transition-all hover:shadow-md group">
                 <img src={img} alt={`Aplicação SK-G ${i}`} className="w-full h-auto" loading="lazy" />
+                <div className="p-5 flex justify-center border-t border-slate-50">
+                  <a 
+                    href={INTERNAL_CATALOG_URL} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center gap-2 text-red-600 font-black uppercase tracking-widest text-[10px] md:text-xs hover:text-red-700 transition-colors"
+                  >
+                    Saiba mais... <ExternalLink size={14} />
+                  </a>
+                </div>
               </div>
             ))}
           </div>
