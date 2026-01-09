@@ -5,12 +5,12 @@ import App from './App';
 
 const container = document.getElementById('root');
 if (!container) {
-  throw new Error("Elemento root não encontrado");
+  console.error("ERRO: Elemento root não encontrado no DOM.");
+} else {
+  const root = createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 }
-
-const root = createRoot(container);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
