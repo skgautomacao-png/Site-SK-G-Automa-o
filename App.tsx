@@ -370,7 +370,7 @@ export default function App() {
           </div>
 
           {/* Col 2: Quick Links */}
-          <div>
+          <div id="footer-links">
             <h5 className="text-white font-black uppercase tracking-widest text-xs mb-8">Links Rápidos</h5>
             <ul className="space-y-4">
               {['Início', 'Empresa', 'Produtos', 'Soluções', 'Contato'].map((link) => (
@@ -378,7 +378,7 @@ export default function App() {
                   <a 
                     href={`#${link.toLowerCase().replace('í', 'i').replace('çõ', 'so')}`} 
                     onClick={(e) => handleScrollTo(e, link.toLowerCase().replace('í', 'i').replace('çõ', 'so'))}
-                    className="text-slate-400 hover:text-red-500 font-bold text-sm transition-colors"
+                    className="text-slate-400 hover:text-red-500 font-bold text-sm transition-colors cursor-pointer"
                   >
                     {link}
                   </a>
