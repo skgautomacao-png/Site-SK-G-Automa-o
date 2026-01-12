@@ -3,10 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { 
   Settings, 
   ChevronRight, 
-  ShieldCheck, 
   Cpu, 
   Box, 
-  FileSearch, 
   Wrench, 
   Mail, 
   Phone, 
@@ -15,11 +13,14 @@ import {
   Factory,
   CheckCircle2,
   Clock,
-  ExternalLink
+  ExternalLink,
+  MapPin,
+  Linkedin,
+  Instagram
 } from 'lucide-react';
 import AIChat from './components/AIChat';
+import WhatsAppButton from './components/WhatsAppButton';
 
-// --- CONFIGURAÇÕES DE ATIVOS ---
 const ASSETS = {
   logo: "https://i.imgur.com/4mqgtQW.png",
   mascot: "https://i.imgur.com/CWKo3Ua.png", 
@@ -89,6 +90,8 @@ export default function App() {
   const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5511997379588";
   const CAMOZZI_CATALOG_URL = "https://shop.camozzi.com/store/camozzi/it/en/";
   const INTERNAL_CATALOG_URL = "https://drive.google.com/file/d/1RF2ZjgEwPpZqgOHCqJCCawGrZIN4pFeK/view?usp=drive_link";
+  const LINKEDIN_URL = "https://www.linkedin.com/company/22287145/";
+  const INSTAGRAM_URL = "https://www.instagram.com/skgautomacao/";
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 antialiased scroll-smooth">
@@ -107,16 +110,19 @@ export default function App() {
         }
       `}</style>
 
-      {/* AIChat Integration */}
-      <AIChat />
+      {/* Floating Elements - Positioned not to overlap */}
+      <div className="fixed bottom-32 right-6 md:right-8 z-[200]">
+        <AIChat />
+      </div>
+      <div className="fixed bottom-8 right-6 md:right-8 z-[210]">
+        <WhatsAppButton />
+      </div>
 
-      {/* HEADER */}
       <header className={`fixed top-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-[#0a3622] shadow-md py-2' : 'bg-[#0a3622]/90 backdrop-blur-md py-4'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <a href="#inicio" onClick={(e) => handleScrollTo(e, 'inicio')} className="block">
             <img src={ASSETS.logo} alt="SK-G Automação" className="h-10 md:h-12 w-auto object-contain" />
           </a>
-
           <nav className="hidden lg:flex items-center gap-8">
             {['Início', 'Empresa', 'Produtos', 'Soluções', 'Contato'].map((item) => (
               <a 
@@ -136,14 +142,12 @@ export default function App() {
               Falar com Consultores
             </a>
           </nav>
-
           <button className="lg:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </header>
 
-      {/* MOBILE MENU */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-[110] bg-[#0a3622] p-8 flex flex-col gap-6 animate-in fade-in slide-in-from-top-4">
           <div className="flex justify-between items-center mb-8">
@@ -163,7 +167,7 @@ export default function App() {
         </div>
       )}
 
-      {/* HERO SECTION */}
+      {/* Hero Section */}
       <section id="inicio" className="relative h-screen flex items-center justify-center overflow-hidden">
         {ASSETS.heroBgs.map((bg, idx) => (
           <div 
@@ -184,50 +188,27 @@ export default function App() {
             Há mais de uma década, a SK-G Automação atua como parceira completa da indústria, com foco em confiabilidade operacional e produtividade.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="#contato" 
-              onClick={(e) => handleScrollTo(e, 'contato')}
-              className="bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-xl font-black text-lg transition-all shadow-xl shadow-red-600/20"
-            >
-              Fale com nossos consultores
-            </a>
-            <a 
-              href="#solucoes" 
-              onClick={(e) => handleScrollTo(e, 'solucoes')}
-              className="bg-white text-slate-900 hover:bg-slate-100 px-10 py-4 rounded-xl font-black text-lg transition-all"
-            >
-              Nossas Soluções
-            </a>
+            <a href="#contato" onClick={(e) => handleScrollTo(e, 'contato')} className="bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-xl font-black text-lg transition-all shadow-xl shadow-red-600/20">Fale com nossos consultores</a>
+            <a href="#solucoes" onClick={(e) => handleScrollTo(e, 'solucoes')} className="bg-white text-slate-900 hover:bg-slate-100 px-10 py-4 rounded-xl font-black text-lg transition-all">Nossas Soluções</a>
           </div>
         </div>
       </section>
 
-      {/* EMPRESA SECTION */}
+      {/* Empresa Section */}
       <section id="empresa" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-red-600 font-black uppercase tracking-widest text-sm mb-4">Nossa Empresa</h2>
-            <h3 className="text-3xl md:text-5xl font-black text-slate-900 mb-8 tracking-tight leading-tight">
-              Parceria Técnica há mais de 10 anos.
-            </h3>
-            <p className="text-lg text-slate-600 leading-relaxed mb-8">
-              Nossa equipe altamente qualificada atua de forma técnica e consultiva, apoiando indústrias desde a definição da solução até a aplicação em campo. 
-              Focamos na aplicação correta dos componentes para eliminar o retrabalho.
-            </p>
+            <h3 className="text-3xl md:text-5xl font-black text-slate-900 mb-8 tracking-tight leading-tight">Parceria Técnica há mais de 10 anos.</h3>
+            <p className="text-lg text-slate-600 leading-relaxed mb-8">Nossa equipe altamente qualificada atua de forma técnica e consultiva, apoiando indústrias desde a definição da solução até a aplicação em campo.</p>
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="flex gap-4">
                 <div className="bg-red-50 p-3 rounded-lg text-red-600 h-fit"><Clock size={24} /></div>
-                <div>
-                  <p className="font-black text-slate-900 text-lg">10+ Anos</p>
-                  <p className="text-sm text-slate-500 font-bold">Experiência Industrial</p>
-                </div>
+                <div><p className="font-black text-slate-900 text-lg">10+ Anos</p><p className="text-sm text-slate-500 font-bold">Experiência Industrial</p></div>
               </div>
               <div className="flex gap-4">
                 <div className="bg-green-50 p-3 rounded-lg text-green-600 h-fit"><CheckCircle2 size={24} /></div>
-                <div>
-                  <p className="font-black text-slate-900 text-lg">100% Técnico</p>
-                  <p className="text-sm text-slate-500 font-bold">Atendimento Consultivo</p>
-                </div>
+                <div><p className="font-black text-slate-900 text-lg">100% Técnico</p><p className="text-sm text-slate-500 font-bold">Atendimento Consultivo</p></div>
               </div>
             </div>
           </div>
@@ -260,51 +241,36 @@ export default function App() {
         </div>
       </section>
 
-      {/* PARCEIROS SECTION */}
+      {/* Brands Section */}
       <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-slate-400 font-black uppercase tracking-widest text-xs mb-4">Parcerias Estratégicas</h2>
-            <h3 className="text-3xl font-black text-slate-900">Marcas Líderes Mundiais</h3>
-          </div>
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h3 className="text-3xl font-black text-slate-900 mb-16">Marcas Líderes Mundiais</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             {Object.entries(ASSETS.brands).map(([name, logo], i) => (
-              <div key={i} className="flex flex-col items-center group">
-                {name === 'camozzi' && (
-                  <span className="text-[10px] font-black text-red-600 uppercase tracking-widest mb-2">Distribuidor Autorizado</span>
-                )}
-                <div className="bg-white p-6 rounded-2xl border border-slate-100 w-full h-24 flex items-center justify-center transition-all group-hover:shadow-lg">
-                  <img src={logo} alt={name} className="max-h-full max-w-full object-contain" />
-                </div>
+              <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 flex items-center justify-center transition-all hover:shadow-lg">
+                <img src={logo} alt={name} className="max-h-12 w-auto object-contain" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PRODUTOS SECTION */}
+      {/* Produtos Section */}
       <section id="produtos" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div className="max-w-2xl">
+          <div className="flex justify-between items-end mb-16">
+            <div>
               <h2 className="text-red-600 font-black uppercase tracking-widest text-xs mb-4">Nosso Portfólio</h2>
-              <h3 className="text-4xl font-black text-slate-900 tracking-tight">Soluções em Pneumática</h3>
+              <h3 className="text-4xl font-black text-slate-900">Soluções em Pneumática</h3>
             </div>
-            <a 
-              href={CAMOZZI_CATALOG_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-red-600 font-black uppercase tracking-widest text-sm flex items-center gap-2 group"
-            >
-              Consultar catálogo completo <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+            <a href={CAMOZZI_CATALOG_URL} target="_blank" className="text-red-600 font-black uppercase tracking-widest text-sm flex items-center gap-2 group">Catálogo Camozzi <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" /></a>
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { title: 'Válvulas', desc: 'Direcionais e Solenoides', icon: <Settings /> },
+              { title: 'Válvulas', desc: 'Solenoides e Direcionais', icon: <Settings /> },
               { title: 'Atuadores', desc: 'Cilindros ISO e Especiais', icon: <Cpu /> },
               { title: 'Tratamento', desc: 'Filtros e Reguladores FRL', icon: <Factory /> },
-              { title: 'Conexões', desc: 'Engates Rápidos e Tubos', icon: <Box /> }
+              { title: 'Conexões', desc: 'Engates e Tubos', icon: <Box /> }
             ].map((p, idx) => (
               <div key={idx} className="p-10 bg-slate-50 rounded-3xl border border-slate-100 hover:bg-slate-950 hover:text-white transition-all group">
                 <div className="text-red-600 mb-6 group-hover:text-red-500">{p.icon}</div>
@@ -316,7 +282,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* SOLUCOES (PORTFOLIO) SECTION */}
+      {/* Solucoes Section */}
       <section id="solucoes" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
@@ -326,16 +292,9 @@ export default function App() {
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
             {ASSETS.portfolio.map((img, i) => (
               <div key={i} className="break-inside-avoid bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm transition-all hover:shadow-md group">
-                <img src={img} alt={`Aplicação SK-G ${i}`} className="w-full h-auto" loading="lazy" />
+                <img src={img} alt={`Aplicação SK-G ${i}`} className="w-full h-auto" />
                 <div className="p-5 flex justify-center border-t border-slate-50">
-                  <a 
-                    href={INTERNAL_CATALOG_URL} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center gap-2 text-red-600 font-black uppercase tracking-widest text-[10px] md:text-xs hover:text-red-700 transition-colors"
-                  >
-                    Saiba mais... <ExternalLink size={14} />
-                  </a>
+                  <a href={INTERNAL_CATALOG_URL} target="_blank" className="flex items-center gap-2 text-red-600 font-black uppercase tracking-widest text-[10px] hover:text-red-700">Saiba mais... <ExternalLink size={14} /></a>
                 </div>
               </div>
             ))}
@@ -343,140 +302,128 @@ export default function App() {
         </div>
       </section>
 
-      {/* CLIENTES CAROUSEL */}
-      <section className="py-20 bg-white border-y border-slate-100 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
-          <h2 className="text-slate-900 font-black text-2xl tracking-tight">Empresas que confiam em nossas soluções</h2>
-          <p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">Atuação consolidada em diferentes segmentos industriais</p>
-        </div>
+      {/* Clients Section */}
+      <section className="py-20 bg-white border-y border-slate-100 overflow-hidden text-center">
+        <h3 className="text-slate-900 font-black text-2xl mb-12">Empresas que confiam em nós</h3>
         <div className="carousel-track">
           {[...ASSETS.clients, ...ASSETS.clients].map((client, idx) => (
             <div key={idx} className="w-[250px] px-8 flex items-center justify-center">
-              <img src={client} alt="Cliente SK-G" className="max-h-16 w-auto object-contain" />
+              <img src={client} alt="Cliente" className="max-h-16 w-auto object-contain transition-all hover:scale-105" />
             </div>
           ))}
         </div>
       </section>
 
-      {/* CONTATO SECTION */}
-      <section id="contato" className="py-24 bg-slate-950 text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-red-600/5 blur-[120px] pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <h2 className="text-red-500 font-black uppercase tracking-widest text-xs mb-6">Contato Técnico e Comercial</h2>
-              <h3 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tighter">
-                Fale com nossos <br /> <span className="text-red-500">Consultores.</span>
-              </h3>
-              <p className="text-xl text-slate-400 font-medium mb-12">
-                Receba orientação técnica e comercial especializada para sua aplicação. Atendimento focado na sua produtividade.
-              </p>
-              
-              <div className="space-y-10">
-                <div className="flex items-center gap-6">
-                  <div className="bg-red-600 p-6 rounded-2xl shadow-xl shadow-red-600/30 transition-transform hover:scale-105">
-                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-white"><Phone size={42} /></a>
-                  </div>
-                  <div>
-                    <p className="text-sm font-black text-red-500 uppercase tracking-[0.2em] mb-1">WhatsApp</p>
-                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-3xl md:text-4xl font-black hover:text-red-500 transition-colors tracking-tighter">+55 11 99737-9588</a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-6">
-                  <div className="bg-white/10 p-6 rounded-2xl transition-transform hover:scale-105">
-                    <Mail size={42} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-black text-slate-500 uppercase tracking-[0.2em] mb-1">E-mail para Cotações</p>
-                    <div className="flex flex-col gap-2">
-                      <p className="text-xl md:text-2xl font-black tracking-tighter">vendas.jundiai@skgautomacao.com.br</p>
-                      <p className="text-xl md:text-2xl font-black tracking-tighter">vendas.cps@skgautomacao.com.br</p>
-                    </div>
-                  </div>
-                </div>
+      {/* Contato Section */}
+      <section id="contato" className="py-24 bg-slate-950 text-white relative">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+          <div>
+            <h2 className="text-red-500 font-black uppercase tracking-widest text-xs mb-6">Contato Técnico</h2>
+            <h3 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter">Fale com nossos <span className="text-red-500">Consultores.</span></h3>
+            <div className="space-y-8">
+              <div className="flex items-center gap-6">
+                <div className="bg-red-600 p-6 rounded-2xl shadow-lg shadow-red-600/20"><Phone size={42} /></div>
+                <div><p className="text-sm font-black text-red-500 uppercase tracking-widest">WhatsApp</p><a href={WHATSAPP_URL} target="_blank" className="text-3xl font-black hover:text-red-400 transition-colors">+55 11 99737-9588</a></div>
               </div>
-
-              {/* BLOCO DE SUPORTE TÉCNICO COM MASCOTE ATUALIZADO E AMPLIADO */}
-              <div className="mt-20 flex flex-col md:flex-row items-center gap-12 bg-white/5 p-12 rounded-[4rem] border border-white/10 max-w-3xl transition-all hover:bg-white/10 hover:border-red-600/50 duration-500 group">
-                <div className="relative flex-shrink-0">
-                  <div className="absolute -inset-4 bg-red-600 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                  <img 
-                    src={ASSETS.mascot} 
-                    alt="Mascote SK-G" 
-                    className="relative h-48 w-48 md:h-56 md:w-56 object-contain bg-white p-3 rounded-[2rem] border-[5px] border-red-600 shadow-2xl" 
-                  />
-                </div>
-                <div className="flex-1 text-center md:text-left">
-                  <p className="text-3xl md:text-4xl font-black text-white leading-tight tracking-tighter mb-6">Suporte técnico Especializado</p>
-                  <p className="text-lg md:text-xl text-slate-300 font-bold italic leading-relaxed">
-                    "Qualidade e precisão em cada componente fornecido."
-                  </p>
-                </div>
+              <div className="flex items-center gap-6">
+                <div className="bg-white/10 p-6 rounded-2xl"><Mail size={42} /></div>
+                <div><p className="text-sm font-black text-slate-500 uppercase tracking-widest">E-mail Corporativo</p><p className="text-xl font-black">vendas.jundiai@skgautomacao.com.br</p></div>
               </div>
             </div>
-
-            <div className="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl">
-              <h4 className="text-3xl font-black text-slate-900 mb-8 tracking-tight">Solicitar Atendimento</h4>
-              <form className="space-y-6" action="mailto:vendas@skgautomacao.com.br" method="post" encType="text/plain">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Nome Completo</label>
-                  <input type="text" name="nome" className="w-full bg-slate-50 border-b-2 border-slate-200 p-4 focus:outline-none focus:border-red-600 transition-colors font-bold text-slate-900" placeholder="Digite seu nome..." required />
-                </div>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Empresa</label>
-                    <input type="text" name="empresa" className="w-full bg-slate-50 border-b-2 border-slate-200 p-4 focus:outline-none focus:border-red-600 transition-colors font-bold text-slate-900" placeholder="Nome da empresa..." required />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Telefone</label>
-                    <input type="tel" name="telefone" className="w-full bg-slate-50 border-b-2 border-slate-200 p-4 focus:outline-none focus:border-red-600 transition-colors font-bold text-slate-900" placeholder="(00) 00000-0000" required />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">E-mail Corporativo</label>
-                  <input type="email" name="email" className="w-full bg-slate-50 border-b-2 border-slate-200 p-4 focus:outline-none focus:border-red-600 transition-colors font-bold text-slate-900" placeholder="email@empresa.com.br" required />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Como podemos ajudar?</label>
-                  <textarea name="mensagem" className="w-full bg-slate-50 border-b-2 border-slate-200 p-4 h-32 focus:outline-none focus:border-red-600 transition-colors font-bold text-slate-900" placeholder="Descreva sua necessidade técnica..."></textarea>
-                </div>
-                <button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-6 rounded-2xl text-xl uppercase tracking-widest shadow-xl shadow-red-600/30 transition-all">
-                  Solicitar atendimento
-                </button>
-              </form>
+            <div className="mt-20 flex flex-col md:flex-row items-center gap-12 bg-white/5 p-12 rounded-[4rem] border border-white/10">
+              <img src={ASSETS.mascot} alt="Mascote" className="h-48 w-48 object-contain bg-white p-3 rounded-[2rem] border-[5px] border-red-600 shadow-2xl" />
+              <div className="flex-1"><p className="text-3xl font-black mb-4 tracking-tighter">Suporte técnico Especializado</p><p className="text-lg text-slate-300 font-bold italic">"Qualidade e precisão em cada componente fornecido."</p></div>
             </div>
+          </div>
+          <div className="bg-white p-10 md:p-16 rounded-[3rem] text-slate-900 shadow-2xl">
+            <h4 className="text-3xl font-black mb-8 tracking-tight text-center lg:text-left">Solicitar Atendimento</h4>
+            <form className="space-y-6">
+              <input type="text" placeholder="Nome" className="w-full bg-slate-50 border-b-2 p-4 text-slate-900 font-bold focus:outline-none focus:border-red-600 transition-all" />
+              <input type="text" placeholder="Empresa" className="w-full bg-slate-50 border-b-2 p-4 text-slate-900 font-bold focus:outline-none focus:border-red-600 transition-all" />
+              <input type="email" placeholder="E-mail Corporativo" className="w-full bg-slate-50 border-b-2 p-4 text-slate-900 font-bold focus:outline-none focus:border-red-600 transition-all" />
+              <textarea placeholder="Necessidade Técnica" className="w-full bg-slate-50 border-b-2 p-4 h-32 text-slate-900 font-bold focus:outline-none focus:border-red-600 transition-all"></textarea>
+              <button className="w-full bg-red-600 text-white font-black py-6 rounded-2xl text-xl uppercase tracking-widest hover:bg-red-700 transition-all transform hover:-translate-y-1">Solicitar agora</button>
+            </form>
           </div>
         </div>
       </section>
 
-      {/* BOTÃO FLUTUANTE WHATSAPP */}
-      <a 
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 z-[99] bg-[#25D366] text-white p-5 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center group"
-        aria-label="WhatsApp"
-      >
-        <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-        </svg>
-      </a>
+      {/* Expanded Footer */}
+      <footer className="bg-[#051a10] py-20 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Col 1: Logo & About */}
+          <div>
+            <img src={ASSETS.logo} alt="SK-G" className="h-10 mb-6" />
+            <p className="text-slate-400 text-sm leading-relaxed font-medium mb-8">
+              Distribuidor autorizado Camozzi Automation. Especialistas em soluções pneumáticas e automação industrial para alta performance.
+            </p>
+            <div className="flex gap-4">
+              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-3 rounded-full hover:bg-red-600 transition-all text-white"><Linkedin size={20} /></a>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-3 rounded-full hover:bg-red-600 transition-all text-white"><Instagram size={20} /></a>
+            </div>
+          </div>
 
-      {/* FOOTER */}
-      <footer className="bg-slate-950 py-16 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
-          <div className="flex flex-col items-center md:items-start gap-4">
-            <img src={ASSETS.logo} alt="SK-G" className="h-12 w-auto object-contain" />
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">Automação Industrial e Pneumática | Há mais de 10 anos em campo.</p>
+          {/* Col 2: Quick Links */}
+          <div>
+            <h5 className="text-white font-black uppercase tracking-widest text-xs mb-8">Links Rápidos</h5>
+            <ul className="space-y-4">
+              {['Início', 'Empresa', 'Produtos', 'Soluções', 'Contato'].map((link) => (
+                <li key={link}>
+                  <a 
+                    href={`#${link.toLowerCase().replace('í', 'i').replace('çõ', 'so')}`} 
+                    onClick={(e) => handleScrollTo(e, link.toLowerCase().replace('í', 'i').replace('çõ', 'so'))}
+                    className="text-slate-400 hover:text-red-500 font-bold text-sm transition-colors"
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="flex gap-10 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-            <a href="#empresa" onClick={(e) => handleScrollTo(e, 'empresa')} className="hover:text-white transition-colors">Empresa</a>
-            <a href="#produtos" onClick={(e) => handleScrollTo(e, 'produtos')} className="hover:text-white transition-colors">Produtos</a>
-            <a href="#solucoes" onClick={(e) => handleScrollTo(e, 'solucoes')} className="hover:text-white transition-colors">Soluções</a>
-            <a href="#contato" onClick={(e) => handleScrollTo(e, 'contato')} className="hover:text-white transition-colors">Contato</a>
+
+          {/* Col 3: Contact */}
+          <div>
+            <h5 className="text-white font-black uppercase tracking-widest text-xs mb-8">Atendimento</h5>
+            <ul className="space-y-6 text-slate-400 text-sm font-medium">
+              <li className="flex gap-4">
+                <MapPin className="text-red-500 shrink-0" size={20} />
+                <span>Rua Jacinto Zequim, 117 - Sala 5<br />Jardim Alice - Medeiros<br />Jundiaí - SP, 13212-321</span>
+              </li>
+              <li className="flex gap-4">
+                <Phone className="text-red-500 shrink-0" size={20} />
+                <span>+55 11 99737-9588</span>
+              </li>
+              <li className="flex gap-4">
+                <Mail className="text-red-500 shrink-0" size={20} />
+                <span>vendas.jundiai@skgautomacao.com.br</span>
+              </li>
+            </ul>
           </div>
-          <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest">© {new Date().getFullYear()} SK-G Automação Industrial</p>
+
+          {/* Col 4: Services - Restored colors */}
+          <div>
+            <h5 className="text-white font-black uppercase tracking-widest text-xs mb-8">Nossas Marcas</h5>
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(ASSETS.brands).slice(0, 4).map(([name, logo], i) => (
+                <div key={i} className="bg-white p-3 rounded-xl flex items-center justify-center border border-white/5 shadow-sm">
+                  <img src={logo} alt={name} className="max-h-8 w-auto object-contain" />
+                </div>
+              ))}
+            </div>
+            <p className="mt-8 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">
+              Engenharia e Qualidade
+            </p>
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 pt-16 mt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest">
+            © {new Date().getFullYear()} SK-G Automação Industrial - Todos os direitos reservados.
+          </p>
+          <div className="flex gap-8 text-[10px] font-black text-slate-600 uppercase tracking-widest">
+            <a href="#" className="hover:text-red-500 transition-colors">Termos de Uso</a>
+            <a href="#" className="hover:text-red-500 transition-colors">Privacidade</a>
+          </div>
         </div>
       </footer>
     </div>
