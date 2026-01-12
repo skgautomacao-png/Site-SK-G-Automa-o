@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -50,7 +49,10 @@ const AIChat: React.FC = () => {
             <div className="bg-[#0a3622] p-4 flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <img src={MASCOT_URL} alt="Mascote" className="w-10 h-10 bg-white rounded-full p-1 border-2 border-red-500 object-contain" />
-                <div><h3 className="font-black text-white text-sm uppercase">Especialista SK-G</h3><p class="text-[10px] text-green-300 font-bold">Online</p></div>
+                <div>
+                  <h3 className="font-black text-white text-sm uppercase">Especialista SK-G</h3>
+                  <p className="text-[10px] text-green-300 font-bold">Online</p>
+                </div>
               </div>
               <button onClick={() => setIsOpen(false)} className="text-white/60 hover:text-white transition-colors"><X size={24} /></button>
             </div>
