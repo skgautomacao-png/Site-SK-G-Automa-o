@@ -110,7 +110,7 @@ export default function App() {
         }
       `}</style>
 
-      {/* Floating Elements - Positioned not to overlap */}
+      {/* Floating Elements */}
       <div className="fixed bottom-32 right-6 md:right-8 z-[200]">
         <AIChat />
       </div>
@@ -400,7 +400,7 @@ export default function App() {
             </ul>
           </div>
 
-          {/* Col 4: Services - Restored colors */}
+          {/* Col 4: Our Brands */}
           <div>
             <h5 className="text-white font-black uppercase tracking-widest text-xs mb-8">Nossas Marcas</h5>
             <div className="grid grid-cols-2 gap-4">
