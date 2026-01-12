@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   Settings, 
@@ -38,10 +37,17 @@ const ASSETS = {
     "https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=1920&auto=format&fit=crop"
   ],
   portfolio: [
-    "https://i.imgur.com/lzdInzh.png", "https://i.imgur.com/k2MjQMk.png", "https://i.imgur.com/FMf5AdW.png",
-    "https://i.imgur.com/HtWU4ub.png", "https://i.imgur.com/U76W3FQ.png", "https://i.imgur.com/PomIzC3.png",
-    "https://i.imgur.com/9RvHtZ9.png", "https://i.imgur.com/YzdK49u.png", "https://i.imgur.com/LoFuj1R.png",
-    "https://i.imgur.com/p91cG3w.png", "https://i.imgur.com/wf0Ft3v.png"
+    "https://i.imgur.com/lzdInzh.png", 
+    "https://i.imgur.com/k2MjQMk.png", 
+    "https://i.imgur.com/FMf5AdW.png",
+    "https://i.imgur.com/HtWU4ub.png", 
+    "https://i.imgur.com/U76W3FQ.png", 
+    "https://i.imgur.com/PomIzC3.png",
+    "https://i.imgur.com/9RvHtZ9.png", 
+    "https://i.imgur.com/YzdK49u.png", 
+    "https://i.imgur.com/LoFuj1R.png",
+    "https://i.imgur.com/p91cG3w.png", 
+    "https://i.imgur.com/wf0Ft3v.png"
   ],
   clients: [
     "https://i.imgur.com/CAF1EEN.png", "https://i.imgur.com/FBo9PHp.png", "https://i.imgur.com/TzAzS85.png",
@@ -94,7 +100,7 @@ export default function App() {
   const INSTAGRAM_URL = "https://www.instagram.com/skgautomacao/";
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 antialiased scroll-smooth">
+    <div className="min-h-screen bg-white font-sans text-slate-900 antialiased">
       <style>{`
         html { scroll-behavior: smooth; }
         section { scroll-margin-top: 80px; }
@@ -342,13 +348,13 @@ export default function App() {
               <input type="text" placeholder="Empresa" className="w-full bg-slate-50 border-b-2 p-4 text-slate-900 font-bold focus:outline-none focus:border-red-600 transition-all" />
               <input type="email" placeholder="E-mail Corporativo" className="w-full bg-slate-50 border-b-2 p-4 text-slate-900 font-bold focus:outline-none focus:border-red-600 transition-all" />
               <textarea placeholder="Necessidade Técnica" className="w-full bg-slate-50 border-b-2 p-4 h-32 text-slate-900 font-bold focus:outline-none focus:border-red-600 transition-all"></textarea>
-              <button className="w-full bg-red-600 text-white font-black py-6 rounded-2xl text-xl uppercase tracking-widest hover:bg-red-700 transition-all transform hover:-translate-y-1">Solicitar agora</button>
+              <button type="button" className="w-full bg-red-600 text-white font-black py-6 rounded-2xl text-xl uppercase tracking-widest hover:bg-red-700 transition-all transform hover:-translate-y-1">Solicitar agora</button>
             </form>
           </div>
         </div>
       </section>
 
-      {/* Expanded Footer */}
+      {/* Footer */}
       <footer className="bg-[#051a10] py-20 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Col 1: Logo & About */}
