@@ -251,9 +251,9 @@ export default function App() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h3 className="text-3xl font-black text-slate-900 mb-16">Marcas Líderes Mundiais</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
             {Object.entries(ASSETS.brands).map(([name, logo], i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 flex items-center justify-center transition-all hover:shadow-lg">
+              <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 flex items-center justify-center transition-all hover:shadow-lg shadow-sm">
                 <img src={logo} alt={name} className="max-h-12 w-auto object-contain" />
               </div>
             ))}
